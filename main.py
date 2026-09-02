@@ -1,4 +1,11 @@
+import random
+
 MAX_LINES = 3
+MIN_BET = 1
+MAX_BET = 100
+
+ROWS = 3
+COLS = 3
 
 def deposit():
     while True:
@@ -26,9 +33,30 @@ def get_number_of_lines():
              print("PLease enter a number.")
     return lines
 
+def get_bet():
+    while True:
+        amount = input("What would you like to bet? $: ")
+        if amount.isdigit():
+            amount = int(amount)
+            if amount >= MIN_BET and amount <= MAX_BET:
+                break
+            else:
+                print(f"Amount must be between {MIN_BET}$ - {MAX_BET}$.")
+        else:
+            print("PLease enter a number.")
+    return amount
+    
+
+
 def main():
     balance = deposit()
     lines = get_number_of_lines()
-    print(balance, lines)
+    while True:
+        bet =  get_bet()
+        total_bet = bet * lines
+        if total_bet > balance:
+            print(f"YOu dont have enough to bet. Your current balance is: {balance}$")
+        else:
+            break
 
 main()
